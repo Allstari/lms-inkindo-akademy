@@ -34,11 +34,14 @@
     <div class="min-h-screen bg-base-100">
         @include('layouts.navigation')
 
+        <div class="flex flex-col min-h-screen">
+            <!-- Page Content -->
+            <main class="py-24 flex-1">
+                {{ $slot }}
+            </main>
 
-        <!-- Page Content -->
-        <main class="py-24">
-            {{ $slot }}
-        </main>
+            @include('layouts.footer')
+        </div>
     </div>
     <script src="{{ asset('assets/js/jquery-3.6.3.min.js') }}"></script>
     <script src="{{ asset('assets/js/script.js') }}"></script>

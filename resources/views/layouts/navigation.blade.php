@@ -1,4 +1,4 @@
-<div class="navbar bg-info text-base-100 shadow-sm z-10 fixed bg-transparent backdrop-blur-lg border-b border-base-200">
+<div class="navbar bg-info text-base-100 shadow-sm z-10 fixed backdrop-blur-lg border-b border-base-200">
 
     <div class="navbar-start ml-10">
         <img src="{{ asset('assets/images/logo.png') }}" alt="" class="w-14 h-14 mr-5">
@@ -7,14 +7,14 @@
     <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal px-1 flex gap-4 ">
             <li><a href="{{ route('home') }}">Beranda</a></li>
-            {{-- <li><a href="{{ route('course.index') }}">Kursus</a></li>
-            <li><a href="{{ route('contact') }}">Kontak Kami</a></li> --}}
-            {{-- @auth
+            <li><a href="{{ route('course.index') }}">Kursus</a></li>
+            {{-- <li><a href="{{ route('contact') }}">Kontak Kami</a></li> --}}
+            @auth
                 @hasrole('author')
                     <li>
                         <details>
-                            <summary>Master Data</summary>
-                            <ul class="p-2 z-10 ">
+                            <summary>Data Utama</summary>
+                            <ul class="p-2 z-10 text-lg text-gray-800 ">
                                 <li><a href="{{ route('dashboard.admin.participant.index') }}">Data Peserta</a></li>
                                 <li><a href="{{ route('dashboard.admin.instructor.index') }}">Data Mentor</a></li>
                                 <li><a href="{{ route('dashboard.admin.course.index') }}">Data Kursus</a></li>
@@ -24,7 +24,7 @@
                     </li>
                 @endrole
             @else
-            @endauth --}}
+            @endauth
 
         </ul>
     </div>
@@ -118,8 +118,8 @@
         <span class="btm-nav-label text-xs">Kursus</span>
     </a>
 
-    <a href="#" class="{{ Request::is('/contact') ? 'active' : '' }}">
+    {{-- <a href="#" class="{{ Request::is('/contact') ? 'active' : '' }}">
         <i class="fa-solid fa-address-book" class="h-5 w-5"></i>
         <span class="btm-nav-label text-xs">Kontak</span>
-    </a>
+    </a> --}}
 </div>

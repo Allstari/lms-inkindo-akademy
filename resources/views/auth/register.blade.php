@@ -32,8 +32,8 @@
                     <div class="grid grid-cols-2 gap-4 mb-4">
                         <div>
                             <x-input.input-label for="phone" :value="__('Nomor Telepon')" />
-                            <x-input.text-input id="phone" class="mt-1 w-full" type="text" name="phone"
-                                :value="old('phone')" required autofocus autocomplete="phone" />
+                            <x-input.text-input id="phone" class="mt-1 w-full" type="tel" name="phone"
+                                :value="old('phone')" required autofocus autocomplete="phone" pattern="^\d{9,13}$" />
                             <x-input.input-error :messages="$errors->get('phone')" class="mt-2" />
                         </div>
                         <div>
@@ -90,4 +90,23 @@
                 </d>
             </div>
         </div>
+        <x-slot name="script">
+            <script>
+                // JavaScript untuk memastikan input telepon diawali dengan 62
+                document.addEventListener('DOMContentLoaded', function() {
+                    const phoneInput = document.getElementById('phone');
+
+                    phoneInput.addEventListener('input', function() {
+                        let phoneValue = phoneInput.value;
+
+                        // Jika nomor diawali dengan 08 atau selain 62, ubah menjadi 62
+                        if (phoneValue.startsWith('08')) {
+                            phoneInput.value = '62' + phoneValue.substring(2);
+                        } else if (!phoneValue.startsWith('62')) {
+                            phoneInput.value = '62' + phoneValue.replace(/^0/, ''); // Ganti 0 dengan 62
+                        }
+                    });
+                });
+            </script>
+        </x-slot>
 </x-guest-layout>
