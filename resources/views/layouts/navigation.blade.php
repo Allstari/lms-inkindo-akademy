@@ -7,7 +7,7 @@
     <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal px-1 flex gap-4 ">
             <li><a href="{{ route('home') }}">Beranda</a></li>
-            <li><a href="{{ route('course.index') }}">Kursus</a></li>
+            <li><a href="{{ route('course.index') }}">Course</a></li>
             {{-- <li><a href="{{ route('contact') }}">Kontak Kami</a></li> --}}
             @auth
                 @hasrole('author')
