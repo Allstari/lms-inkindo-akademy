@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\MaterialController;
 use App\Http\Controllers\Admin\InstructorController;
 use App\Http\Controllers\Admin\ParticipantController;
+use App\Http\Controllers\Admin\EnrollmentController;
 use App\Http\Controllers\Admin\AssignmentController;
 use App\Http\Controllers\Admin\CourseController as AdminCourseController;
 
@@ -45,6 +46,7 @@ Route::prefix('dashboard')->name('dashboard.')->middleware('auth')->group(functi
         Route::resource('/course', AdminCourseController::class)->except('show');
         Route::resource('/material', MaterialController::class)->except('show');
         Route::get('/material/{course}/create', [MaterialController::class, 'createWithCourse'])->name('course.createWithCourse');
+        Route::get('/enrollment', EnrollmentController::class)->except('index');
     });
 });
 

@@ -20,9 +20,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('address');
             $table->text('map')->nullable();
-            $table->string('instagram')->nullable();
-            $table->string('facebook')->nullable();
-            $table->string('x')->nullable();
+            $table->string('sosmed')->nullable();
             $table->string('email')->nullable();
             $table->date('open_date');
             $table->date('close_date');
