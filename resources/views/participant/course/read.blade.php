@@ -188,7 +188,8 @@
 
     <x-slot name="script">
         <script>
-            if ({{ $currentTopic->material->type == 'quiz' }}) {
+            let type = "{{ $currentTopic->material->type }}";
+            if (type == 'quiz') {
                 // Mengambil nilai exitCount dari session melalui route atau inisialisasi dengan 0
                 let exitCount = {{ session('exitCount', 0) }};
 
@@ -255,10 +256,10 @@
                     return allAnswered;
                 }
 
-                console.log('{{ $startTime }}');
+                let quizTime = "{{ $currentTopic?->material?->quiz?->duration }}" || 0;
 
                 const quizStartTime = new Date("{{ $startTime }}").getTime(); // Waktu mulai dari server
-                const quizDuration = {{ $currentTopic?->material?->quiz?->duration }} * 60 * 1000; // Durasi dalam milidetik
+                const quizDuration = quizTime * 60 * 1000; // Durasi dalam milidetik
 
                 function startCountdown() {
                     const minuteSpan = document.querySelector("#timer span:first-child");
@@ -271,15 +272,15 @@
 
                         if (remaining <= 0) {
                             clearInterval(interval);
-                            minuteSpan.style.setProperty('--value', 0);
-                            secondSpan.style.setProperty('--value', 0);
+                            minuteSpan?.style.setProperty('--value', 0);
+                            secondSpan?.style.setProperty('--value', 0);
                             document.getElementById('nextButton').disabled = true; // Disable submit button
                             alert("Waktu habis!");
                         } else {
                             const minutes = Math.floor(remaining / (1000 * 60));
                             const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
-                            minuteSpan.style.setProperty('--value', minutes);
-                            secondSpan.style.setProperty('--value', seconds);
+                            minuteSpan?.style.setProperty('--value', minutes);
+                            secondSpan?.style.setProperty('--value', seconds);
                         }
                     }, 1000);
                 }
