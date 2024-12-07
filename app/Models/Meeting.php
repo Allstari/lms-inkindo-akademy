@@ -6,29 +6,29 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Assignment extends Model
+class Meeting extends Model
 {
     protected $guarded = ['id'];
 
-    protected $with = ['material'];
+    protected $with = ['course'];
 
     /**
-     * Get the material that owns the Assignment
+     * Get the course that owns the Meeting
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function material(): BelongsTo
+    public function course(): BelongsTo
     {
-        return $this->belongsTo(Material::class, 'material_id');
+        return $this->belongsTo(Course::class, 'course_id');
     }
 
     /**
-     * Get all of the results for the Assignment
+     * Get all of the schedules for the Meeting
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function results(): HasMany
+    public function schedules(): HasMany
     {
-        return $this->hasMany(Result::class, 'assignment_id');
+        return $this->hasMany(MeetingSchedule::class, 'meeting_id');
     }
 }
