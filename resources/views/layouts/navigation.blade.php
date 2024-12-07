@@ -6,19 +6,45 @@
     </div>
     <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal px-1 flex gap-4 ">
-            <li><a href="{{ route('home') }}">Beranda</a></li>
+            <li><a href="{{ route('home') }}">Home</a></li>
             <li><a href="{{ route('course.index') }}">Course</a></li>
             {{-- <li><a href="{{ route('contact') }}">Kontak Kami</a></li> --}}
             @auth
                 @hasrole('author')
                     <li>
                         <details>
-                            <summary>Data Utama</summary>
+                            <summary>Master Data</summary>
                             <ul class="p-2 z-10 text-lg text-gray-800 ">
                                 <li><a href="{{ route('dashboard.admin.participant.index') }}">Data Peserta</a></li>
                                 <li><a href="{{ route('dashboard.admin.instructor.index') }}">Data Mentor</a></li>
                                 <li><a href="{{ route('dashboard.admin.course.index') }}">Data Kursus</a></li>
-                                <li><a href="{{ route('dashboard.admin.material.index') }}">Data Materi</a></li>
+                                <li><a href="{{ route('dashboard.enrollment.index') }}">Data Pendaftaran</a></li>
+                                <li><a href="{{ route('dashboard.material.index') }}">Data Materi</a></li>
+                                <li><a href="{{ route('dashboard.assignment.index') }}">Data Tugas</a></li>
+                                <li><a href="{{ route('dashboard.quiz.index') }}">Data Kuis</a></li>
+                            </ul>
+                        </details>
+                    </li>
+                    <li>
+                        <details>
+                            <summary>Quiz</summary>
+                            <ul class="p-2 z-10 text-gray-800">
+                                <li><a href="{{ route('dashboard.question.index') }}">Data Pertanyaan</a></li>
+                            </ul>
+                        </details>
+                    </li>
+                    <li><a href="{{ route('dashboard.admin.setting.index') }}">Setting</a></li>
+                @endrole
+                @hasrole('instructor')
+                    <li>
+                        <details>
+                            <summary>Master Data</summary>
+                            <ul class="p-2 z-10 text-lg text-gray-800 ">
+                                <li><a href="{{ route('dashboard.instructor.course.index') }}">Data Kursus</a></li>
+                                <li><a href="{{ route('dashboard.enrollment.index') }}">Data Pendaftaran</a></li>
+                                <li><a href="{{ route('dashboard.material.index') }}">Data Materi</a></li>
+                                <li><a href="{{ route('dashboard.assignment.index') }}">Data Tugas</a></li>
+                                <li><a href="{{ route('dashboard.quiz.index') }}">Data Kuis</a></li>
                             </ul>
                         </details>
                     </li>
@@ -111,11 +137,11 @@
 
     <a href="#" class="{{ Request::is('/') ? 'active' : '' }}">
         <i class="fa-solid fa-house" class="h-5 w-5"></i>
-        <span class="btm-nav-label text-xs">Beranda</span>
+        <span class="btm-nav-label text-xs">Home</span>
     </a>
     <a href="#" class="{{ Request::is('/course') ? 'active' : '' }}">
         <i class="fa-solid fa-book" class="h-5 w-5"></i>
-        <span class="btm-nav-label text-xs">Kursus</span>
+        <span class="btm-nav-label text-xs">Course</span>
     </a>
 
     {{-- <a href="#" class="{{ Request::is('/contact') ? 'active' : '' }}">

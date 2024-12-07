@@ -5,14 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Course;
 use App\Models\Enrollment;
 use App\Models\Instructor;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Yajra\DataTables\DataTables;
+use Yajra\DataTables\Facades\DataTables;
 
 class EnrollmentController extends Controller
 {
-
     public function index(Request $request)
     {
         if (Auth::user()->roles->pluck('name')[0] == 'author') {

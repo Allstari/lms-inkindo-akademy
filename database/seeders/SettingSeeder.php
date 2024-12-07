@@ -14,14 +14,12 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         DB::table('settings')->insert([
-            'name' => 'Swevel Media',
-            'alias' => 'Swevel',
+            'name' => 'Inkindo Akademy',
+            'alias' => 'Inkindo',
             'logo' => 'logo.png',
             'description' => 'lorem ipsum dolor sit amet',
-            'phone' => '6281385931773',
+            'phone' => '0823232323',
             'address' => 'Indonesia',
-            'open_date' => '2024-11-01',
-            'close_date' => '2025-01-01',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
