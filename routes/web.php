@@ -6,6 +6,8 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MeetingController;
+use App\Http\Controllers\MeetingScheduleController;
 use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\MaterialController;
@@ -67,5 +69,21 @@ Route::prefix('dashboard')->name('dashboard.')->middleware('auth')->group(functi
         Route::get('/instructor/course', [InstructorCourseController::class, 'index'])->name('course.index');
     });
 });
+
+Route::get('meetings', [MeetingController::class, 'index']);
+Route::post('meetings', [MeetingController::class, 'store']);
+Route::get('meetings/{id}', [MeetingController::class, 'show']);
+
+// Route untuk menambah MeetingSchedule
+Route::post('/meeting-schedules', [MeetingScheduleController::class, 'store']);
+
+// Route untuk melihat detail MeetingSchedule
+Route::get('/meeting-schedules/{id}', [MeetingScheduleController::class, 'show']);
+
+// Route untuk mengupdate MeetingSchedule
+Route::put('/meeting-schedules/{id}', [MeetingScheduleController::class, 'update']);
+
+// Route untuk menghapus MeetingSchedule
+Route::delete('/meeting-schedules/{id}', [MeetingScheduleController::class, 'destroy']);
 
 require __DIR__ . '/auth.php';
