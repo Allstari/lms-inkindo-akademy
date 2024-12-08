@@ -53,14 +53,14 @@
 
             <!-- Course ID Input -->
             <div class="form-control">
-                <label for="course_id" class="label text-lg">ID Kursus:</label>
+                <label for="course_id" class="label text-black">ID Kursus:</label>
                 <input type="text" id="course_id" name="course_id" class="input input-bordered w-full"
                     placeholder="Masukkan ID Kursus">
             </div>
 
             <!-- Meeting Time Input -->
             <div class="form-control">
-                <label for="meeting_time" class="label text-lg">Waktu Meeting:</label>
+                <label for="meeting_time" class="label text-black">Waktu Meeting:</label>
                 <input type="text" id="meeting_time" name="meeting_time" class="input input-bordered w-full"
                     placeholder="Masukkan Waktu Meeting">
             </div>
