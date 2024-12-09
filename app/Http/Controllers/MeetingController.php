@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Meeting;
 use App\Models\Course;
+use App\Models\MeetingSchedule;
 use Illuminate\Http\Request;
 
 class MeetingController extends Controller
@@ -13,10 +14,12 @@ class MeetingController extends Controller
     {
         if ($request->ajax()) {
             $meetings = Meeting::with('course')->get();
+            return response()->json(['meetings' => $meetings]);
             return response()->json([
                 'meetings' => $meetings
             ]);
         }
+
 
         return view('meetings.index'); // Tampilan untuk menampilkan daftar meeting
     }
@@ -54,6 +57,56 @@ class MeetingController extends Controller
 
         return response()->json([
             'meeting' => $meeting
+        ]);
+    }
+
+    // Menampilkan semua jadwal meeting terkait
+    public function schedules($meetingId)
+    {
+        $meeting = Meeting::with('schedules')->find($meetingId);
+
+        if (!$meeting) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Meeting tidak ditemukan!'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'schedules' => $meeting->schedules // Menampilkan jadwal terkait
+        ]);
+    }
+
+    // Menambahkan jadwal meeting baru
+    public function addSchedule(Request $request, $meetingId)
+    {
+        $validatedData = $request->validate([
+            'schedule_time' => 'required|date', // Validasi waktu jadwal meeting
+        ]);
+
+        // Mencari meeting berdasarkan ID
+        $meeting = Meeting::find($meetingId);
+
+        if (!$meeting) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Meeting tidak ditemukan!'
+            ], 404);
+        }
+
+        // Menambahkan jadwal meeting baru
+        $schedule = new MeetingSchedule([
+            'meeting_id' => $meeting->id,
+            'schedule_time' => $validatedData['schedule_time']
+        ]);
+
+        $meeting->schedules()->save($schedule);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Jadwal meeting berhasil dibuat!',
+            'schedule' => $schedule
         ]);
     }
 }

@@ -86,4 +86,16 @@ Route::put('/meeting-schedules/{id}', [MeetingScheduleController::class, 'update
 // Route untuk menghapus MeetingSchedule
 Route::delete('/meeting-schedules/{id}', [MeetingScheduleController::class, 'destroy']);
 
+///
+
+// Menampilkan semua meeting beserta kursus yang terkait
+Route::resource('meetings', MeetingController::class);
+
+// Menampilkan jadwal meeting terkait
+Route::get('meetings/{meetingId}/schedules', [MeetingController::class, 'schedules']);
+
+// Menambahkan jadwal meeting untuk sebuah meeting
+Route::post('meetings/{meetingId}/add-schedule', [MeetingController::class, 'addSchedule']);
+
+
 require __DIR__ . '/auth.php';
