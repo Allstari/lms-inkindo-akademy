@@ -130,7 +130,7 @@
                             if (response.success) {
                                 alert(response.message);
                                 $('#schedule-row-' + scheduleId)
-                            .remove(); // Remove row from table
+                                    .remove(); // Remove row from table
                             } else {
                                 alert(response.message);
                             }

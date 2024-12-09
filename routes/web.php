@@ -91,6 +91,7 @@ Route::delete('/meeting-schedules/{id}', [MeetingScheduleController::class, 'des
 // Menampilkan semua meeting beserta kursus yang terkait
 Route::resource('meetings', MeetingController::class);
 
+Route::resource('meeting_schedule', MeetingController::class);
 // Menampilkan jadwal meeting terkait
 Route::get('meetings/{meetingId}/schedules', [MeetingController::class, 'schedules']);
 
