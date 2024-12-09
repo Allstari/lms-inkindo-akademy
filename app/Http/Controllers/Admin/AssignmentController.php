@@ -20,7 +20,7 @@ class AssignmentController extends Controller
             if (Auth::user()->roles->pluck('name')[0] == 'author') {
                 $assignments = Assignment::all();
             } else {
-                $assignments = Assignment::whereHas('material.topic.course', function ($query) {
+                $assignments = Assignment::whereHas('material.topic.course.instructors', function ($query) {
                     $query->where('instructor_id', Auth::user()->instructor->id);
                 })
                     ->with('material.topic.course')
@@ -44,7 +44,7 @@ class AssignmentController extends Controller
                 ->get();
         } else {
             $materials = Material::where('type', 'assignment')
-                ->whereHas('topic.course', function ($query) {
+                ->whereHas('topic.course.instructors', function ($query) {
                     $query->where('instructor_id', Auth::user()->instructor->id);
                 })
                 ->with(['topic.course'])
@@ -88,7 +88,7 @@ class AssignmentController extends Controller
                 ->get();
         } else {
             $materials = Material::where('type', 'assignment')
-                ->whereHas('topic.course', function ($query) {
+                ->whereHas('topic.course.instructors', function ($query) {
                     $query->where('instructor_id', Auth::user()->instructor->id);
                 })
                 ->with(['topic.course'])

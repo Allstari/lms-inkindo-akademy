@@ -20,7 +20,7 @@ class CourseSeeder extends Seeder
                 ->map(fn($p) => "<p>$p</p>")
                 ->implode(''),
             'excerpt' => fake()->paragraph(),
-            'duration' => '200 Menit',
+            'duration' => '200',
             'start_date' => now(),
             'end_date' => now()->addMonths(3),
             'created_at' => now(),

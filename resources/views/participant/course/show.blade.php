@@ -151,16 +151,16 @@
 
                         <x-card.card-default class="static mt-5" title="Kursus Lainnya">
                             <div class="flex w-full flex-col">
-                                @foreach ($courses as $course)
-                                    <a href="{{ url('/course/' . $course->slug) }}" class="flex items-center gap-6">
+                                @foreach ($courses as $item)
+                                    <a href="{{ url('/course/' . $item->slug) }}" class="flex items-center gap-6">
                                         <div class="avatar">
                                             <div class="w-16 rounded">
                                                 <img
-                                                    src="{{ $course->cover ? asset('storage/course/' . $course->cover) : asset('assets/images/no-image.png') }}" />
+                                                    src="{{ $item->cover ? asset('storage/course/' . $item->cover) : asset('assets/images/no-image.png') }}" />
                                             </div>
                                         </div>
                                         <div>
-                                            {{ $course->title }}
+                                            {{ $item->title }}
                                         </div>
                                     </a>
                                     <div class="divider"></div>

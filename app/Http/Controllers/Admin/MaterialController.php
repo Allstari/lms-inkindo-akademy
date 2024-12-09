@@ -35,7 +35,9 @@ class MaterialController extends Controller
                     $query->where('id', $course);
                 })->with(['topic.course'])->latest()->get();
             } else {
-                $materials->whereHas('topic.course')->with(['topic.course'])->latest()->get();
+                $materials->whereHas('topic.course.instructors', function ($query) {
+                    $query->where('instructor_id', Auth::user()->instructor->id);
+                })->with(['topic.course'])->latest()->get();
             }
 
             return DataTables::of($materials)->make();
@@ -172,7 +174,6 @@ class MaterialController extends Controller
             $courses = Instructor::with('courses.topics')
                 ->find(Auth::user()->instructor->id)
                 ->courses ?? collect();
-
         }
 
         return view('admin.material.createWithCourse', compact('course', 'courses'));

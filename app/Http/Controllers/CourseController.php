@@ -46,8 +46,6 @@ class CourseController extends Controller
         $validatedData = $request->validate([
             'agreement' => 'required',
         ]);
-
-
         Enrollment::create([
             'participant_id' => Auth::user()->participant->id,
             'course_id' => $request->course_id,
@@ -60,7 +58,6 @@ class CourseController extends Controller
     {
         $startTime = null;
         if ($topic->material->type == 'quiz') {
-            session()->forget('quiz_start_time_' . $topic->material->quiz->id);
             session()->forget('exitCount');
             $questions = $topic->material->quiz->questions()->with('options')->get();
             $startTime = session()->get('quiz_start_time_' . $topic->material->quiz->id, now());
@@ -132,6 +129,7 @@ class CourseController extends Controller
     public function submit(Request $request, Course $course, Topic $topic)
     {
         $answers = $request->all();
+        // dd($answers);
         $totalScore = 0;
         $exitCount = $request->input('exit_count', 0);
 
