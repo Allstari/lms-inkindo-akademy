@@ -60,7 +60,7 @@
 
             <!-- Meeting Time Input -->
             <div class="form-control">
-                <label for="meeting_time" class="label text-">Waktu Meeting:</label>
+                <label for="meeting_time" class="label text-black">Waktu Meeting:</label>
                 <input type="text" id="meeting_time" name="meeting_time" class="input input-bordered w-full"
                     placeholder="Masukkan Waktu Meeting">
             </div>
