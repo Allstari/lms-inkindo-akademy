@@ -20,7 +20,7 @@
                     </defs>
                 </svg>
 
-                <div class="hero min-h-screen w-full h-screen"
+                {{-- <div class="hero min-h-screen w-full h-screen"
                     style="background-image: url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp);">
                     <div class="hero-overlay bg-opacity-60"></div>
                     <div class="hero-content text-neutral-content text-center">
@@ -34,7 +34,89 @@
                             <button class="btn btn-primary">Get Started</button>
                         </div>
                     </div>
+                </div> --}}
+                {{-- start --}}
+                <div class="carousel w-full">
+                    <div id="slide1" class="carousel-item relative w-full active">
+                        <img src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
+                            class="w-full" />
+                        <div class="carousel-caption">
+                            <h2 class="text-3xl font-bold text-white">Pengenalan Material Konstruksi</h2>
+                            <p class="mt-2 text-white">Temukan berbagai jenis material yang digunakan dalam proyek
+                                konstruksi, dari beton hingga baja, dan pahami fungsinya.</p>
+                        </div>
+                    </div>
+
+                    <div id="slide2" class="carousel-item relative w-full">
+                        <img src="https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp"
+                            class="w-full" />
+                        <div class="carousel-caption">
+                            <h2 class="text-3xl font-bold text-white">Teknik Pemasangan Struktur Bangunan</h2>
+                            <p class="mt-2 text-white">Pelajari teknik-teknik yang digunakan dalam pemasangan struktur
+                                bangunan yang kuat dan efisien.</p>
+                        </div>
+                    </div>
+
+                    <div id="slide3" class="carousel-item relative w-full">
+                        <img src="https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.webp"
+                            class="w-full" />
+                        <div class="carousel-caption">
+                            <h2 class="text-3xl font-bold text-white">Keselamatan Konstruksi di Lapangan</h2>
+                            <p class="mt-2 text-white">Pahami prosedur keselamatan kerja yang harus diterapkan untuk
+                                menghindari kecelakaan di lokasi proyek konstruksi.</p>
+                        </div>
+                    </div>
+
+                    <div id="slide4" class="carousel-item relative w-full">
+                        <img src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp"
+                            class="w-full" />
+                        <div class="carousel-caption">
+                            <h2 class="text-3xl font-bold text-white">Penggunaan Alat Berat dalam Konstruksi</h2>
+                            <p class="mt-2 text-white">Pelajari cara mengoperasikan alat berat seperti crane, excavator,
+                                dan bulldozer untuk proyek konstruksi yang lebih efisien.</p>
+
+                            <button class="btn btn-primary">Get Started</button>
+                        </div>
+                    </div>
                 </div>
+
+                <script>
+                    let currentIndex = 0;
+                    const slides = document.querySelectorAll('.carousel-item');
+                    const totalSlides = slides.length;
+
+                    function moveToNextSlide() {
+                        slides[currentIndex].classList.remove('active');
+                        currentIndex = (currentIndex + 1) % totalSlides;
+                        slides[currentIndex].classList.add('active');
+                    }
+
+                    setInterval(moveToNextSlide, 3000); // Change slide every 3 seconds
+                </script>
+
+                <style>
+                    .carousel-item {
+                        display: none;
+                    }
+
+                    .carousel-item.active {
+                        display: block;
+                    }
+
+                    .carousel-caption {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        text-align: center;
+                        color: white;
+                        background: rgba(0, 0, 0, 0.5);
+                        padding: 20px;
+                        border-radius: 10px;
+                    }
+                </style>
+
+                {{-- end --}}
             </div>
 
             <div class="max-w-7xl sm:px-6 lg:px-8">
@@ -42,7 +124,7 @@
                 <div class="py-12">
                     <h2 class="font-bold text-center md:text-3xl text-lg">Daftar Kursus</h2>
 
-                    <div class="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-6 p-4">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-5 p-4">
                         @forelse ($latestCourse as $course)
                             <x-card.card-image title="{{ $course->title }}"
                                 image="{{ $course->cover ? 'storage/course/' . $course->cover : 'assets/images/no-image.png' }}"

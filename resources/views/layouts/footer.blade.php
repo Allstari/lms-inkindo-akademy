@@ -1,7 +1,7 @@
 <footer class="bg-info text-base-100 lg:mb-0 mb-5">
     <div class="mx-auto max-w-7xl overflow-hidden py-4 px-6 lg:px-8">
         <p class="mt-10 text-center text-xs leading-5">
-            <span class="font-semibold">Made with ❤ Inkindo akademy</span>
+            <span class="font-semibold">Made with ❤ Inkindo academy</span>
         </p>
 
         <!-- Social Media Icons -->
