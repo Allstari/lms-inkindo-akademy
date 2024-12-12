@@ -135,7 +135,7 @@
                                     </span></p>
                                 <div class="card-actions md:justify-end justify-start items-center">
                                     @if (now()->lte($course->start_date))
-                                        <div class="badge badge-outline">Belum Dibuka</div>
+                                        <div class="badge badge-outline">No Public</div>
                                     @else
                                         <div class="badge badge-outline">Terakhir diupdate</div>
                                         <div class="badge badge-outline">{{ $course->updated_at->diffForHumans() }}
