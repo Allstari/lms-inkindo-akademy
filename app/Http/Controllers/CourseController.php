@@ -315,7 +315,7 @@ class CourseController extends Controller
     public function assignment(Request $request, Course $course, Topic $topic)
     {
         $validatedData = $request->validate([
-            'file' => 'required|mimes:rar,zip|max:10000',
+            'file' => 'required|mimes:rar,zip,pdf|max:10000',
         ]);
 
         $parseDate = Carbon::parse(
