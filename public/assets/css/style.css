@@ -1,3 +1,23 @@
+@media screen and (min-height: 100px) and (max-height: 555px) {
+    body,
+    html {
+        overflow: hidden;
+        /* Tidak bisa scroll jika dibagi layar */
+        height: 100%;
+    }
+
+    .split {
+        display: block !important;
+    }
+
+    .main-content {
+        height: 100vh;
+        /* Konten hanya mengisi satu layar penuh */
+        overflow-y: auto;
+        display: none;
+    }
+}
+
 .note-editor.note-airframe .note-editing-area,
 .note-editor.note-frame .note-editing-area {
     background-color: white !important;

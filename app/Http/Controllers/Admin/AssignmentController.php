@@ -23,7 +23,7 @@ class AssignmentController extends Controller
                 $assignments = Assignment::whereHas('material.topic.course.instructors', function ($query) {
                     $query->where('instructor_id', Auth::user()->instructor->id);
                 })
-                    ->with('material.topic.course')
+                    ->with('material.topic.course.instructors')
                     ->get();
             }
 
@@ -47,7 +47,7 @@ class AssignmentController extends Controller
                 ->whereHas('topic.course.instructors', function ($query) {
                     $query->where('instructor_id', Auth::user()->instructor->id);
                 })
-                ->with(['topic.course'])
+                ->with(['topic.course.instructors'])
                 ->get();
         }
 
@@ -64,14 +64,14 @@ class AssignmentController extends Controller
             'material_id' => 'required',
             'title' => 'required|string',
             'description' => 'required|string',
-            'due_date' => 'required',
+            'deadline' => 'required|numeric',
         ]);
 
         Assignment::create([
             'title' => $validatedData['title'],
             'material_id' => $validatedData['material_id'],
             'description' => $validatedData['description'],
-            'due_date' => $validatedData['due_date'],
+            'deadline' => $validatedData['deadline'],
         ]);
 
         return redirect()->route('dashboard.assignment.index')->with('success', 'Tugas Berhasil Ditambahkan!');
@@ -91,7 +91,7 @@ class AssignmentController extends Controller
                 ->whereHas('topic.course.instructors', function ($query) {
                     $query->where('instructor_id', Auth::user()->instructor->id);
                 })
-                ->with(['topic.course'])
+                ->with(['topic.course.instructors'])
                 ->get();
         }
 
@@ -107,7 +107,7 @@ class AssignmentController extends Controller
             'material_id' => 'required',
             'title' => 'required|string',
             'description' => 'required|string',
-            'due_date' => 'required',
+            'deadline' => 'required|numeric',
         ];
 
         $validatedData = $request->validate($rules);
@@ -116,7 +116,7 @@ class AssignmentController extends Controller
             'title' => $validatedData['title'],
             'material_id' => $validatedData['material_id'],
             'description' => $validatedData['description'],
-            'due_date' => $validatedData['due_date'],
+            'deadline' => $validatedData['deadline'],
         ]);
 
         return redirect()->route('dashboard.assignment.index')->with('success', 'Tugas Berhasil Diupdate');

@@ -14,12 +14,14 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         DB::table('settings')->insert([
-            'name' => 'Inkindo Akademy',
+            'name' => 'Inkindo Academy',
             'alias' => 'Inkindo',
             'logo' => 'logo.png',
             'description' => 'lorem ipsum dolor sit amet',
-            'phone' => '0823232323',
+            'phone' => '6288',
             'address' => 'Indonesia',
+            'open_date' => '2024-11-01',
+            'close_date' => '2025-01-01',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

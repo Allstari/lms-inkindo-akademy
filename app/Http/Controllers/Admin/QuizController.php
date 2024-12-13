@@ -23,7 +23,7 @@ class QuizController extends Controller
                 $quizzes = Quiz::whereHas('material.topic.course.instructors', function ($query) {
                     $query->where('instructor_id', Auth::user()->instructor->id);
                 })
-                    ->with('material.topic.course')
+                    ->with('material.topic.course.instructors')
                     ->get();
             }
 
@@ -47,7 +47,7 @@ class QuizController extends Controller
                 ->whereHas('topic.course.instructors', function ($query) {
                     $query->where('instructor_id', Auth::user()->instructor->id);
                 })
-                ->with(['topic.course'])
+                ->with(['topic.course.instructors'])
                 ->get();
         }
 
@@ -64,7 +64,7 @@ class QuizController extends Controller
             'material_id' => 'required',
             'title' => 'required|string',
             'description' => 'required|string',
-            'duration' => 'required|numeric',
+            'duration' => 'required|min:5',
         ]);
 
         Quiz::create([
@@ -91,7 +91,7 @@ class QuizController extends Controller
                 ->whereHas('topic.course.instructors', function ($query) {
                     $query->where('instructor_id', Auth::user()->instructor->id);
                 })
-                ->with(['topic.course'])
+                ->with(['topic.course.instructors'])
                 ->get();
         }
 
@@ -107,7 +107,7 @@ class QuizController extends Controller
             'material_id' => 'required',
             'title' => 'required|string',
             'description' => 'required|string',
-            'duration' => 'required|numeric',
+            'duration' => 'required|min:5',
         ];
 
         $validatedData = $request->validate($rules);

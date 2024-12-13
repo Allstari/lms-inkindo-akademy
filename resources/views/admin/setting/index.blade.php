@@ -68,7 +68,7 @@
                     <div class="mt-4">
                         <x-input.input-label for="map" :value="__('Peta')" />
                         <x-input.text-input id="map" class="mt-1 w-full" type="text" name="map"
-                            :value="old('map', $setting?->map ?? '')" required autofocus autocomplete="map" />
+                            :value="old('map', $setting?->map ?? '')" autofocus autocomplete="map" />
                         <x-input.input-error :messages="$errors->get('map')" class="mt-2" />
                     </div>
                     <div class="mt-4">

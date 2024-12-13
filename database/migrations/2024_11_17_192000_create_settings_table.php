@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -22,6 +21,8 @@ return new class extends Migration
             $table->text('map')->nullable();
             $table->json('social_media')->nullable();
             $table->string('email')->nullable();
+            $table->date('open_date')->nullable();
+            $table->date('close_date')->nullable();
             $table->timestamps();
         });
     }

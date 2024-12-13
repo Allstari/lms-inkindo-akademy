@@ -39,7 +39,7 @@
                     <li>
                         <details>
                             <summary>Master Data</summary>
-                            <ul class="p-2 z-10 text-lg text-gray-800 ">
+                            <ul class="p-2 z-10 text-lg text-gray-800">
                                 <li><a href="{{ route('dashboard.instructor.course.index') }}">Data Kursus</a></li>
                                 <li><a href="{{ route('dashboard.enrollment.index') }}">Data Pendaftaran</a></li>
                                 <li><a href="{{ route('dashboard.material.index') }}">Data Materi</a></li>
@@ -48,6 +48,27 @@
                             </ul>
                         </details>
                     </li>
+                    <li>
+                        <details>
+                            <summary>Kuis</summary>
+                            <ul class="p-2 z-10 text-lg text-gray-800">
+                                <li><a href="{{ route('dashboard.question.index') }}">Data Pertanyaan</a></li>
+                                <li><a href="{{ route('dashboard.instructor.quiz.result') }}">Hasil Kuis</a></li>
+                            </ul>
+                        </details>
+                    </li>
+                    <li>
+                        <details>
+                            <summary>Tugas</summary>
+                            <ul class="p-2 z-10 text-lg text-gray-800">
+                                <li><a href="{{ route('dashboard.instructor.assignment.index') }}">Hasil Tugas</a></li>
+                            </ul>
+                        </details>
+                    </li>
+                @endrole
+                @role('participant')
+                    <li><a href="{{ route('dashboard.participant.quiz.index') }}">Kuis</a></li>
+                    <li><a href="{{ route('dashboard.participant.assignment.index') }}">Tugas</a></li>
                 @endrole
             @else
             @endauth
@@ -82,6 +103,25 @@
                             </a>
                         </li>
                     @endhasanyrole
+                    @hasrole('participant')
+                        <li>
+                            <details>
+                                <summary>Kursus</summary>
+                                <ul>
+                                    <li>
+                                        <a href="{{ route('dashboard.participant.quiz.index') }}">
+                                            {{ __('Kuis') }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('dashboard.participant.assignment.index') }}">
+                                            {{ __('Tugas') }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </details>
+                        </li>
+                    @endrole
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <li>

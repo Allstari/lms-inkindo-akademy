@@ -30,11 +30,17 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-poppins antialiased">
     <div class="min-h-screen bg-base-100">
         @include('layouts.navigation')
 
-        <div class="flex flex-col min-h-screen">
+        <div class="toast toast-end toast-middle split hidden">
+            <div class="alert alert-info">
+                <span>Dilarang split screen</span>
+            </div>
+        </div>
+
+        <div class="flex flex-col min-h-screen main-content">
             <!-- Page Content -->
             <main class="py-24 flex-1">
                 {{ $slot }}

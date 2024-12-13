@@ -45,10 +45,10 @@ class QuestionController extends Controller
         if (Auth::user()->roles->pluck('name')[0] == 'author') {
             $quizzes = Quiz::all();
         } else {
-            $quizzes = Quiz::whereHas('material.topic.course.instructors', function ($query) {
+            $quizzes = Quiz::whereHas('material.topic.course', function ($query) {
                 $query->where('instructor_id', Auth::user()->instructor->id);
             })
-                ->with('material.topic.course.instructors')
+                ->with('material.topic.course')
                 ->get();
         }
 
@@ -74,18 +74,6 @@ class QuestionController extends Controller
 
         try {
             foreach ($validated['questions'] as $questionData) {
-                $isCorrectFound = false;
-                foreach ($questionData['options'] as $option) {
-                    if ($option['is_correct']) {
-                        $isCorrectFound = true;
-                        break;
-                    }
-                }
-
-                if (!$isCorrectFound) {
-                    return response()->json(['error' => 'Minimal satu opsi harus memiliki nilai is_correct yang true atau 1'], 422);
-                }
-
                 $question = Question::create([
                     'quiz_id' => $validated['quiz_id'],
                     'question_text' => $questionData['question_text'],
@@ -116,6 +104,7 @@ class QuestionController extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
+
     }
 
     /**
