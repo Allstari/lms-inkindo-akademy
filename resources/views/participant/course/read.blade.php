@@ -52,6 +52,12 @@
                                 $currentTopic->material->quiz?->quizAttempts
                                     ?->where('participant_id', auth()->user()->participant->id)->first())
                             <x-alert.warning message="Kamu sudah menjawab quiz ini." />
+                            <x-button.success-button type="button" class="mt-4 btn-sm text-white">
+                                Skor :
+                                {{ $currentTopic->material->quiz?->quizAttempts
+                                    ?->where('participant_id', auth()->user()->participant->id)->first()->score }}
+                            </x-button.success-button>
+
                             <x-form
                                 action="{{ route('course.destroy', ['course' => $course->slug, 'topic' => $currentTopic->slug]) }}"
                                 style="display: inline;">
@@ -142,7 +148,20 @@
                             $currentTopic->material->type == 'assignment' &&
                                 $currentTopic->material->assignment?->results
                                     ?->where('assignment_id', $currentTopic->material->assignment->id)->where('participant_id', auth()->user()->participant->id)->first())
+                            @php
+                                $result = $currentTopic->material->assignment?->results
+                                    ?->where('assignment_id', $currentTopic->material->assignment->id)
+                                    ->where('participant_id', auth()->user()->participant->id)
+                                    ->first();
+                            @endphp
                             <x-alert.warning message="Kamu sudah mengunggah tugas ini." />
+                            <x-button.success-button type="button" class="mt-4 btn-sm text-white">
+                                <a
+                                    href="{{ url('/storage/assignments/' . Auth::user()->participant->id . '/' . $result->assignment->id . '/' . $result->file_url) }}">File
+                                    Tugas</a>
+                            </x-button.success-button>
+
+
                             <x-form
                                 action="{{ route('course.destroyAssignment', ['course' => $course->slug, 'topic' => $currentTopic->slug]) }}"
                                 style="display: inline;">

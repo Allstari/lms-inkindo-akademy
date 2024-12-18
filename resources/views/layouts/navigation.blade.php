@@ -22,6 +22,7 @@
                                 <li><a href="{{ route('dashboard.material.index') }}">Data Materi</a></li>
                                 <li><a href="{{ route('dashboard.assignment.index') }}">Data Tugas</a></li>
                                 <li><a href="{{ route('dashboard.quiz.index') }}">Data Kuis</a></li>
+                                <li><a href="{{ route('dashboard.meeting.index') }}">Data Meeting</a></li>
                             </ul>
                         </details>
                     </li>
@@ -45,6 +46,7 @@
                                 <li><a href="{{ route('dashboard.material.index') }}">Data Materi</a></li>
                                 <li><a href="{{ route('dashboard.assignment.index') }}">Data Tugas</a></li>
                                 <li><a href="{{ route('dashboard.quiz.index') }}">Data Kuis</a></li>
+                                <li><a href="{{ route('dashboard.meeting.index') }}">Data Meeting</a></li>
                             </ul>
                         </details>
                     </li>
@@ -69,6 +71,7 @@
                 @role('participant')
                     <li><a href="{{ route('dashboard.participant.quiz.index') }}">Kuis</a></li>
                     <li><a href="{{ route('dashboard.participant.assignment.index') }}">Tugas</a></li>
+                    <li><a href="{{ route('dashboard.participant.meeting.index') }}">Meet</a></li>
                 @endrole
             @else
             @endauth
@@ -76,6 +79,37 @@
         </ul>
     </div>
     <div class="navbar-end mr-10">
+        @auth
+            <div class="dropdown dropdown-end">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                    <div class="avatar placeholder">
+                        <div class="bg-neutral text-neutral-content rounded-full w-8">
+                            <i class="fa-regular fa-bell"></i>
+                        </div>
+                    </div>
+                </div>
+                <ul tabindex="0" id="notification-list"
+                    class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-gray-800">
+                    @forelse (auth()->user()->notifications->take(5) as $notification)
+                        <li>
+                            <a href="{{ $notification?->data['link'] }}" class="flex flex-col">
+                                <div class="font-bold">
+                                    {{ $notification?->data['title'] ?? '-' }}
+                                </div>
+                                <div class="text-xs text-center">
+                                    {{ $notification?->data['message'] ?? '-' }}
+                                </div>
+                            </a>
+                        </li>
+                        <hr>
+                    @empty
+                        <li>
+                            Tidak Ada Notifikasi
+                        </li>
+                    @endforelse
+                </ul>
+            </div>
+        @endauth
         <div class="dropdown dropdown-end">
             @auth
                 <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">

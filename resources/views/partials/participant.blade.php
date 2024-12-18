@@ -1,13 +1,51 @@
+<x-card.card-custom class="static glass mt-6">
+    <p class="mb-2">Selamat Datang, {{ auth()->user()->participant->name }}
+    </p>
+</x-card.card-custom>
+@if (auth()->user()->participant->enrolls->count() > 0)
+    <div class="grid grid-cols-1 md::grid-cols-2 lg:grid-cols-3 gap-5 mt-6">
+        <x-card.card-custom class="static glass chart-container">
+            <h5 class="mb-2 text-lg font-bold tracking-tight">Kursus Aktif & Belum Aktif</h5>
+            <hr>
+            <canvas id="courseStatus"></canvas>
+        </x-card.card-custom>
+        <div></div>
+        <x-card.card-custom class="static glass chart-container">
+            <h5 class="mb-2 text-lg font-bold tracking-tight">Kursus Selesai & Belum Selesai</h5>
+            <hr>
+            <canvas id="courseCompleted"></canvas>
+        </x-card.card-custom>
+
+        {{-- <x-card.card-custom class="static glass chart-container">
+            <h5 class="mb-2 text-lg font-bold tracking-tight">Completion Rates</h5>
+            <hr>
+            <canvas id="courseRate"></canvas>
+        </x-card.card-custom> --}}
+        <x-card.card-custom class="static glass chart-container col-span-3">
+            <h5 class="mb-2 text-lg font-bold tracking-tight">Progress Kursus</h5>
+            <hr>
+            <canvas id="courseProgress"></canvas>
+        </x-card.card-custom>
+        <x-card.card-custom class="static glass chart-container col-span-3">
+            <h5 class="mb-2 text-lg font-bold tracking-tight">Kursus Selesai</h5>
+            <hr>
+            <canvas id="courseDone"></canvas>
+        </x-card.card-custom>
+    </div>
+@endif
+
 <section class="py-16">
+    <h2 class="text-center py-4 font-bold md:text-2xl text-lg">Kursus Saya</h2>
     <div class="grid gap-4 bg-base-100 shadow rounded p-6">
         <x-form method="GET" action="{{ route('dashboard.index') }}" class="mb-8 relative">
-            <div class="flex items-center space-x-4">
-                <x-input.text-input type="search" name="search" placeholder="Cari Kursus..." :value="$search"
-                    class="w-full" />
-            </div>
-            <div class="flex justify-between items-center mt-3">
+
+            <div class="flex items-center mt-3 gap-6 justify-center">
                 <div>
                     <p class="font-bold">Ditampilkan {{ $activeCourses->count() }} - {{ $activeCourses->total() }}</p>
+                </div>
+                <div>
+                    <x-input.text-input type="search" name="search" placeholder="Cari Kursus..." :value="$search"
+                        class="w-full" />
                 </div>
                 <div class="flex justify-end items-center">
                     <select class="select select-bordered w-full max-w-xs" name="filter" id="filter">
@@ -16,14 +54,18 @@
                         <option value="inactive">Belum Aktif</option>
                     </select>
                 </div>
+                <div class="flex justify-start items-center gap-6">
+                    <x-button.primary-button type="submit">Cari</x-button.primary-button>
+                    <a href="{{ route('dashboard.index') }}">
+                        <x-button.warning-button type="submit">Reset</x-button.warning-button>
+                    </a>
+                </div>
             </div>
-            <x-button.primary-button type="submit">Cari</x-button.primary-button>
         </x-form>
 
     </div>
 
-    <div class="py-8 mt-1">
-        <h2 class="text-center py-4 font-bold md:text-2xl text-lg">Kursus Saya</h2>
+    <div class="py-8 mt-1" id="course">
         <div class="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-6 p-4">
             {{-- @dd($activeCourses) --}}
             @forelse ($activeCourses as $course)

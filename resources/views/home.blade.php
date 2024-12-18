@@ -131,7 +131,7 @@
                                 class="static">
                                 {{-- <p>{{ $course->excerpt }}</p> --}}
                                 <p class="font-bold">Total Durasi <span
-                                        class="badge badge-primary">{{ $course->duration }}
+                                        class="badge badge-primary">{{ $course->duration }} Menit
                                     </span></p>
                                 <div class="card-actions md:justify-end justify-start items-center">
                                     @if (now()->lte($course->start_date))

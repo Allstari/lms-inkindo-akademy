@@ -1,28 +1,30 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MeetingController;
-use App\Http\Controllers\MeetingScheduleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\MaterialController;
 use App\Http\Controllers\Admin\QuestionController;
+use App\Http\Controllers\MeetingScheduleController;
 use App\Http\Controllers\Admin\AssignmentController;
 use App\Http\Controllers\Admin\EnrollmentController;
 use App\Http\Controllers\Admin\InstructorController;
 use App\Http\Controllers\Admin\ParticipantController;
 use App\Http\Controllers\Participant\ParticipantControllerUser;
-use App\Http\Controllers\Participant\QuizController as ParticipantQuizController;
-use App\Http\Controllers\Participant\AssignmentController as ParticipantAssignmentController;
 use App\Http\Controllers\Admin\CourseController as AdminCourseController;
-use App\Http\Controllers\Instructor\CourseController as InstructorCourseController;
+use App\Http\Controllers\Admin\MeetingController as AdminMeetingController;
 use App\Http\Controllers\Instructor\QuizController as InstructorQuizController;
+use App\Http\Controllers\Participant\QuizController as ParticipantQuizController;
+use App\Http\Controllers\Instructor\CourseController as InstructorCourseController;
+use App\Http\Controllers\Participant\MeetingController as ParticipantMeetingController;
 use App\Http\Controllers\Instructor\AssignmentController as InstructorAssignmentController;
+use App\Http\Controllers\Participant\AssignmentController as ParticipantAssignmentController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -57,6 +59,8 @@ Route::prefix('dashboard')->name('dashboard.')->middleware('auth')->group(functi
 
         Route::get('/assignment', [ParticipantAssignmentController::class, 'index'])->name('assignment.index');
         Route::get('/assignment/{result}/result', [ParticipantAssignmentController::class, 'result'])->name('assignment.result');
+
+        Route::get('/meeting', [ParticipantMeetingController::class, 'index'])->name('meeting.index');
     });
 
     Route::middleware(['role:participant|instructor'])->group(function () {
@@ -84,6 +88,7 @@ Route::prefix('dashboard')->name('dashboard.')->middleware('auth')->group(functi
         Route::put('/enrollment/{enrollment}', [EnrollmentController::class, 'update'])->name('enrollment.update');
         Route::post('/enrollment', [EnrollmentController::class, 'updateAll'])->name('enrollment.updateAll');
         Route::delete('/enrollment/{enrollment}', [EnrollmentController::class, 'destroy'])->name('enrollment.destroy');
+        Route::resource('/meeting', AdminMeetingController::class)->except('show');
 
         Route::resource('/question', QuestionController::class);
         Route::get('/question/{quiz}/create', [QuestionController::class, 'createWithQuiz'])->name('question.createWithQuiz');
@@ -109,34 +114,5 @@ Route::prefix('dashboard')->name('dashboard.')->middleware('auth')->group(functi
         Route::delete('/assignment/{result}', [InstructorAssignmentController::class, 'destroy'])->name('assignment.destroy');
     });
 });
-
-Route::get('meetings', [MeetingController::class, 'index']);
-Route::post('meetings', [MeetingController::class, 'store']);
-Route::get('meetings/{id}', [MeetingController::class, 'show']);
-
-// Route untuk menambah MeetingSchedule
-Route::post('/meeting-schedules', [MeetingScheduleController::class, 'store']);
-
-// Route untuk melihat detail MeetingSchedule
-Route::get('/meeting-schedules/{id}', [MeetingScheduleController::class, 'show']);
-
-// Route untuk mengupdate MeetingSchedule
-Route::put('/meeting-schedules/{id}', [MeetingScheduleController::class, 'update']);
-
-// Route untuk menghapus MeetingSchedule
-Route::delete('/meeting-schedules/{id}', [MeetingScheduleController::class, 'destroy']);
-
-///
-
-// Menampilkan semua meeting beserta kursus yang terkait
-Route::resource('meetings', MeetingController::class);
-
-Route::resource('meeting_schedule', MeetingController::class);
-// Menampilkan jadwal meeting terkait
-Route::get('meetings/{meetingId}/schedules', [MeetingController::class, 'schedules']);
-
-// Menambahkan jadwal meeting untuk sebuah meeting
-Route::post('meetings/{meetingId}/add-schedule', [MeetingController::class, 'addSchedule']);
-
 
 require __DIR__ . '/auth.php';
