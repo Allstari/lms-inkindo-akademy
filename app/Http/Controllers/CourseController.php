@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Topic;
 use App\Models\Course;
 use App\Models\Option;
@@ -16,6 +17,7 @@ use App\Models\QuestionAnswer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use PHPUnit\Framework\Constraint\Count;
+use App\Notifications\EnrollmentNotification;
 
 class CourseController extends Controller
 {
@@ -51,11 +53,23 @@ class CourseController extends Controller
             'agreement' => 'required',
         ]);
 
-
-        Enrollment::create([
+        $course = $request->course_id;
+        $enrollment = Enrollment::create([
             'participant_id' => Auth::user()->participant->id,
-            'course_id' => $request->course_id,
+            'course_id' => $course,
         ]);
+
+        $mentors = User::whereHas('instructor', function ($query) use ($course) {
+            $query->whereHas('courses', function ($query) use ($course) {
+                $query->where('course_id', $course);
+            });
+        })->get();
+        $admin = User::role('author')->get();
+        $users = $mentors->merge($admin);
+
+        foreach ($users as $user) {
+            $user->notify(new EnrollmentNotification($enrollment));
+        }
 
         return redirect()->back()->with('success', 'Berhasil Melakukan Pendaftaran.');
     }
@@ -190,7 +204,8 @@ class CourseController extends Controller
 
         $quizStartTime = session()->get('quiz_start_time_' . $topic->material->quiz->id);
         $quizDurationInSeconds = $topic->material->quiz->duration * 60;
-        $attemptTime = now()->diffInSeconds($quizStartTime);
+        // $attemptTime = now()->diffInSeconds($quizStartTime);
+        $attemptTime = $quizStartTime->diffInSeconds(now());
 
         $latePenaltyPoints = 0;
 

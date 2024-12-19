@@ -28,7 +28,7 @@ class AssignmentNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -36,10 +36,14 @@ class AssignmentNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+        $course = $this->assignment->material->topic->course->slug;
+        $topic = $this->assignment->material->topic->slug;
         return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', url('/'))
-            ->line('Thank you for using our application!');
+            ->greeting('Halo ' . $notifiable->email)
+            ->subject('Reminder: Deadline Tugas')
+            ->line('Tugas "' . $this->assignment->title . '" kurang dari 1 hari lagi.')
+            ->action('Lihat Tugas', route('course.read', [$course, $topic]))
+            ->line('Ayo cepat submit.');
     }
 
     /**
@@ -56,6 +60,7 @@ class AssignmentNotification extends Notification
 
     public function toDatabase(object $notifiable)
     {
+
         $course = $this->assignment->material->topic->course->slug;
         $topic = $this->assignment->material->topic->slug;
         return [
@@ -66,5 +71,6 @@ class AssignmentNotification extends Notification
             'type' => 'assignment',
             'link' => route('course.read', [$course, $topic]),
         ];
+
     }
 }

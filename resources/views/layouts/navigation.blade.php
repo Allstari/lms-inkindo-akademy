@@ -67,6 +67,17 @@
                             </ul>
                         </details>
                     </li>
+                    <li>
+                        <details>
+                            <summary>Laporan</summary>
+                            <ul class="p-2 z-10 text-lg text-gray-800">
+                                <li><a href="{{ route('dashboard.instructor.report.course') }}">Laporan Kursus</a></li>
+                                <li><a href="{{ route('dashboard.instructor.report.progress') }}">Laporan Progress</a></li>
+                                <li><a href="{{ route('dashboard.instructor.report.complete') }}">Laporan Kursus Selesai</a>
+                                </li>
+                            </ul>
+                        </details>
+                    </li>
                 @endrole
                 @role('participant')
                     <li><a href="{{ route('dashboard.participant.quiz.index') }}">Kuis</a></li>
@@ -88,10 +99,10 @@
                         </div>
                     </div>
                 </div>
-                <ul tabindex="0" id="notification-list"
+                <ul tabindex="0"
                     class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-gray-800">
                     @forelse (auth()->user()->notifications->take(5) as $notification)
-                        <li>
+                        <li class="mb-3">
                             <a href="{{ $notification?->data['link'] }}" class="flex flex-col">
                                 <div class="font-bold">
                                     {{ $notification?->data['title'] ?? '-' }}
@@ -103,10 +114,18 @@
                         </li>
                         <hr>
                     @empty
-                        <li>
-                            Tidak Ada Notifikasi
+                        <li class="mb-3">
+                            <a href="#" class="flex flex-col">
+                                Tidak Ada Notifikasi
+                            </a>
                         </li>
+                        <hr>
                     @endforelse
+                    <li class="flex mt-3 justify-center items-center">
+                        <a href="{{ route('dashboard.notification.index') }}">
+                            {{ __('Lihat Semua') }}
+                        </a>
+                    </li>
                 </ul>
             </div>
         @endauth

@@ -64,7 +64,6 @@
                     <h4 class="text-xl font-bold">Personal Info</h4>
                     <x-form action="{{ route('dashboard.profile.update') }}" enctype="multipart/form-data">
                         @csrf
-                        @method('PUT')
 
                         <input type="hidden" name="oldImage"
                             value="{{ Auth::user()->participant ? Auth::user()->participant->photo : Auth::user()->instructor->photo }}">

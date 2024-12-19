@@ -44,7 +44,6 @@ class ProfileController extends Controller
             }
 
             Instructor::where('user_id', $user->id)->update($validatedData);
-
         } else {
             if ($request->hasFile('photo')) {
                 $path = 'participant/photo/' . Auth::user()->name;
@@ -58,7 +57,7 @@ class ProfileController extends Controller
             Participant::where('user_id', $user->id)->update($validatedData);
         }
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('dashboard.profile.edit')->with('status', 'profile-updated');
     }
 
     /**

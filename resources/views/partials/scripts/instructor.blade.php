@@ -22,33 +22,7 @@
             },
 
         });
-        new Chart($('#courseEnroll').get(0).getContext('2d'), {
-            type: 'pie',
-            data: {
-                labels: @json($chartDataParticipant->pluck('label')),
-                datasets: [{
-                    label: 'Total Peserta',
-                    data: @json($chartDataParticipant->pluck('value')),
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                    ],
-                    color: '#ffff',
-                    hoverOffset: 4
-                }]
-            },
 
-        });
 
         new Chart($('#courseEnroll2').get(0).getContext('2d'), {
             type: 'bar',
@@ -78,37 +52,6 @@
             },
         });
 
-        new Chart($('#courseDone').get(0).getContext('2d'), {
-            type: 'line',
-            data: {
-                labels: @json($chartData['labels']),
-                datasets: [{
-                    label: 'Kursus Selesai',
-                    data: @json($chartData['data']),
-                    fill: false,
-                    borderWidth: 1,
-                    borderColor: 'rgb(75, 192, 192)',
-                    color: '#ffff',
-                    tension: 0.1,
-                    hoverOffset: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                        }
-                    }
-                }
-            }
-        });
+
     }
 </script>

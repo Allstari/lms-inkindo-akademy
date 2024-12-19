@@ -64,7 +64,7 @@ class QuizController extends Controller
             'material_id' => 'required',
             'title' => 'required|string',
             'description' => 'required|string',
-            'duration' => 'required|min:5',
+            'duration' => 'required|min:1',
         ]);
 
         Quiz::create([
@@ -107,7 +107,7 @@ class QuizController extends Controller
             'material_id' => 'required',
             'title' => 'required|string',
             'description' => 'required|string',
-            'duration' => 'required|min:5',
+            'duration' => 'required|min:1',
         ];
 
         $validatedData = $request->validate($rules);

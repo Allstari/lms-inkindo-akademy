@@ -4,18 +4,18 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\QuizController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\MaterialController;
 use App\Http\Controllers\Admin\QuestionController;
-use App\Http\Controllers\MeetingScheduleController;
 use App\Http\Controllers\Admin\AssignmentController;
 use App\Http\Controllers\Admin\EnrollmentController;
 use App\Http\Controllers\Admin\InstructorController;
 use App\Http\Controllers\Admin\ParticipantController;
+use App\Http\Controllers\Instructor\ReportController;
 use App\Http\Controllers\Participant\ParticipantControllerUser;
 use App\Http\Controllers\Admin\CourseController as AdminCourseController;
 use App\Http\Controllers\Admin\MeetingController as AdminMeetingController;
@@ -51,6 +51,7 @@ Route::middleware(['auth', 'role:participant'])->group(function () {
 Route::prefix('dashboard')->name('dashboard.')->middleware('auth')->group(function () {
 
     Route::get('/', [DashboardController::class, 'index'])->name('index');
+    Route::get('/notification', [NotificationController::class, 'index'])->name('notification.index');
 
     Route::name('participant.')->prefix('/participant')->middleware(['role:participant'])->group(function () {
         // Route::get('/my', [DashboardController::class, 'participant'])->name('index');
@@ -95,6 +96,18 @@ Route::prefix('dashboard')->name('dashboard.')->middleware('auth')->group(functi
     });
 
     Route::name('instructor.')->prefix('/instructor')->middleware(['role:instructor'])->group(function () {
+        Route::get('/report/progress', [ReportController::class, 'progress'])->name('report.progress');
+        Route::post('/report/progress', [ReportController::class, 'exportProgress'])->name('report.exportProgress');
+        Route::get('/report/progress/pdf', [ReportController::class, 'exportProgressPdf'])->name('report.exportProgressPdf');
+
+        Route::get('/report/complete', [ReportController::class, 'complete'])->name('report.complete');
+        Route::post('/report/complete', [ReportController::class, 'exportComplete'])->name('report.exportComplete');
+        Route::get('/report/complete/pdf', [ReportController::class, 'exportCompletePdf'])->name('report.exportCompletePdf');
+
+        Route::get('/report/course', [ReportController::class, 'course'])->name('report.course');
+        Route::post('/report/course', [ReportController::class, 'exportCourse'])->name('report.exportCourse');
+        Route::get('/report/course/pdf', [ReportController::class, 'exportCoursePdf'])->name('report.exportCoursePdf');
+
         Route::get('/course', [InstructorCourseController::class, 'index'])->name('course.index');
         Route::get('/quiz/result', [InstructorQuizController::class, 'index'])->name('quiz.result');
         Route::get('/quiz/{attempt}/show', [InstructorQuizController::class, 'show'])->name('quiz.show');
