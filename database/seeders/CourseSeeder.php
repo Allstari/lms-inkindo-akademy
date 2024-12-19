@@ -14,8 +14,8 @@ class CourseSeeder extends Seeder
     public function run(): void
     {
         $course = Course::create([
-            'title' => 'Web Developer',
-            'slug' => 'web-developer',
+            'title' => 'Arsitektur',
+            'slug' => 'Arsitektur',
             'description' => collect(fake()->paragraphs(mt_rand(5, 10)))
                 ->map(fn($p) => "<p>$p</p>")
                 ->implode(''),
@@ -30,7 +30,7 @@ class CourseSeeder extends Seeder
         $course->instructors()->attach(3);
 
         $course2 = Course::create([
-            'title' => 'PHP Laravel',
+            'title' => 'Sipil',
             'slug' => 'php-laravel',
             'description' => collect(fake()->paragraphs(mt_rand(5, 10)))
                 ->map(fn($p) => "<p>$p</p>")
