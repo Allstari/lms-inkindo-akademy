@@ -31,7 +31,7 @@ class CourseSeeder extends Seeder
 
         $course2 = Course::create([
             'title' => 'Sipil',
-            'slug' => 'php-laravel',
+            'slug' => 'Sipil',
             'description' => collect(fake()->paragraphs(mt_rand(5, 10)))
                 ->map(fn($p) => "<p>$p</p>")
                 ->implode(''),

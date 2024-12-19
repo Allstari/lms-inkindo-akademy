@@ -6,9 +6,11 @@ use App\Models\Quiz;
 use App\Models\Option;
 use App\Models\Question;
 use Illuminate\Http\Request;
+use App\Imports\QuestionImport;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -154,5 +156,17 @@ class QuestionController extends Controller
     public function createWithQuiz(Quiz $quiz)
     {
         return view('admin.question.createWithQuiz', compact('quiz'));
+    }
+
+    public function import(Request $request)
+    {
+        $validator = $request->validate([
+            'file' => 'file|mimes:csv,xls,xlsx'
+        ]);
+        $file = $request->file('file');
+        $validator['file'] = $file->store('files');
+        Excel::import(new QuestionImport, request()->file('file'));
+
+        return redirect()->back()->with('success', 'Data Berhasil di Import');
     }
 }

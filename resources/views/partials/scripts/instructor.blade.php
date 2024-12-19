@@ -14,7 +14,7 @@
                     ],
                     backgroundColor: [
                         'rgb(54, 162, 235)',
-                        'rgb(255, 99, 132)',
+                        'rgba(153, 102, 255, 1)',
                     ],
                     color: '#ffff',
                     hoverOffset: 4

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Result;
 use App\Models\Material;
 use App\Models\Assignment;
 use Illuminate\Http\Request;
@@ -128,6 +129,11 @@ class AssignmentController extends Controller
     public function destroy(Assignment $assignment)
     {
         Assignment::destroy($assignment->id);
+        if ($assignment->results) {
+            foreach ($assignment->results as $result) {
+                Result::destroy($result->id);
+            }
+        }
 
         return response()->json([
             'success' => true,

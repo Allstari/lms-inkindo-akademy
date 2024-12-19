@@ -21,8 +21,8 @@
                     label: 'Kursus Aktif & Belum Aktif',
                     data: [{{ $totalActive }}, {{ $totalInActive }}],
                     backgroundColor: [
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 99, 132)',
+                        'rgb(77, 182, 172)', // Soft teal for Active
+                        'rgb(255, 159, 64)', // Warm orange for Inactive
                     ],
                     color: '#ffff',
                     hoverOffset: 4
@@ -41,8 +41,8 @@
                         {{ $totalNotCompleted }}
                     ],
                     backgroundColor: [
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 99, 132)',
+                        'rgb(28, 170, 103)', // Soft green for Completed
+                        'rgb(239, 83, 80)', // Muted red for Not Completed
                     ],
                     color: '#ffff',
                     hoverOffset: 4
@@ -71,18 +71,18 @@
                     label: 'Progress (%)',
                     data: {!! json_encode($totalProgress?->pluck('progress')) !!},
                     backgroundColor: [
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(77, 182, 172, 0.5)', // Soft teal for Progress
+                        'rgba(255, 159, 64, 0.5)', // Soft orange for Progress
+                        'rgba(28, 170, 103, 0.5)', // Soft green
+                        'rgba(239, 83, 80, 0.5)', // Muted red
+                        'rgba(66, 133, 244, 0.5)', // Soft blue
                     ],
                     borderColor: [
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(153, 102, 255, 1)',
+                        'rgba(77, 182, 172, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(28, 170, 103, 1)',
+                        'rgba(239, 83, 80, 1)',
+                        'rgba(66, 133, 244, 1)',
                     ],
                     borderWidth: 1,
                     color: '#ffff',
@@ -100,8 +100,8 @@
                     label: 'Kursus Selesai',
                     data: @json($chartData['data']),
                     fill: false,
-                    borderWidth: 1,
-                    borderColor: 'rgb(75, 192, 192)',
+                    borderWidth: 2,
+                    borderColor: 'rgb(66, 133, 244)', // Soft blue for line
                     color: '#ffff',
                     tension: 0.1,
                     hoverOffset: 4

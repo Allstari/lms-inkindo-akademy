@@ -9,8 +9,8 @@
                     {{ $totalInstructor }}
                 ],
                 backgroundColor: [
-                    'rgb(54, 162, 235)',
-                    'rgba(75, 192, 192)',
+                    '#4E73DF', // Biru gelap
+                    '#1CC88A', // Hijau mint
                 ],
                 color: '#ffff',
                 hoverOffset: 4
@@ -18,6 +18,7 @@
         },
 
     });
+
     new Chart($('#totalEnrollment').get(0).getContext('2d'), {
         type: 'pie',
         data: {
@@ -28,8 +29,8 @@
                     {{ $totalEnrollmentInActive }}
                 ],
                 backgroundColor: [
-                    'rgb(54, 162, 235)',
-                    'rgb(255, 99, 132)',
+                    '#36B9CC', // Biru toska
+                    '#F6C23E', // Kuning cerah
                 ],
                 color: '#ffff',
                 hoverOffset: 4
@@ -46,18 +47,18 @@
                 label: 'Total Peserta',
                 data: @json($chartDataParticipant->pluck('value')),
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
+                    '#FF7F50', // Coral
+                    '#20B2AA', // SeaGreen
+                    '#FFD700', // Gold
+                    '#ADD8E6', // LightBlue
+                    '#9370DB', // MediumPurple
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
+                    '#FF6343', // Tomato
+                    '#3CB371', // MediumSeaGreen
+                    '#FFA500', // Orange
+                    '#87CEFA', // LightSkyBlue
+                    '#8A2BE2', // BlueViolet
                 ],
                 color: '#ffff',
                 hoverOffset: 4

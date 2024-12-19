@@ -278,26 +278,32 @@
                                             Soal
                                         </div>
                                     </div>
-                                    @foreach ($currentTopic->material->quiz->questions as $question)
-                                        <div class="mb-4">
-                                            <p class="font-bold" data-question="question_{{ $question->id }}">
-                                                {{ $question->question_text }}</p>
-                                            <div class="options">
-                                                @foreach ($question->options as $option)
-                                                    {{-- @dd(session('answers.question_1')) --}}
-                                                    <div class="flex justify-start">
-                                                        <label class="label cursor-pointer space-x-3">
-                                                            <input type="radio" name="question_{{ $question->id }}"
-                                                                id="{{ $option->id }}" value="{{ $option->id }}"
-                                                                class="radio checked:bg-blue-500"
-                                                                {{ session('answers.question_' . $question->id) == $option->id ? 'checked' : '' }}>
-                                                            <span class="label-text">{{ $option->option_text }}</span>
-                                                        </label>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    @endforeach
+                                    <ol class="list-decimal pl-5 mt-3">
+                                        @foreach ($currentTopic->material->quiz->questions as $question)
+                                            <li class="mb-4">
+                                                <p class="font-bold select-none"
+                                                    data-question="question_{{ $question->id }}">
+                                                    {{ $question->question_text }}</p>
+                                                <div class="options">
+                                                    @foreach ($question->options as $option)
+                                                        {{-- @dd(session('answers.question_1')) --}}
+                                                        <div class="flex justify-start">
+                                                            <label class="label cursor-pointer space-x-3">
+                                                                <input type="radio"
+                                                                    name="question_{{ $question->id }}"
+                                                                    id="{{ $option->id }}"
+                                                                    value="{{ $option->id }}"
+                                                                    class="radio checked:bg-blue-500"
+                                                                    {{ session('answers.question_' . $question->id) == $option->id ? 'checked' : '' }}>
+                                                                <span
+                                                                    class="label-text">{{ $option->option_text }}</span>
+                                                            </label>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    </ol>
                                 @elseif ($currentTopic->material->type == 'assignment' && $currentTopic->material->assignment)
                                     <h2 class="font-semibold text-2xl mt-3">
                                         {{ $currentTopic->material->assignment->title }}
