@@ -9,8 +9,8 @@
                     {{ $totalInstructor }}
                 ],
                 backgroundColor: [
-                    '#4E73DF', // Biru gelap
-                    '#1CC88A', // Hijau mint
+                    '#4E73DF',
+                    '#1CC88A',
                 ],
                 color: '#ffff',
                 hoverOffset: 4
@@ -29,8 +29,8 @@
                     {{ $totalEnrollmentInActive }}
                 ],
                 backgroundColor: [
-                    '#36B9CC', // Biru toska
-                    '#F6C23E', // Kuning cerah
+                    '#36B9CC',
+                    '#F6C23E',
                 ],
                 color: '#ffff',
                 hoverOffset: 4
@@ -47,18 +47,18 @@
                 label: 'Total Peserta',
                 data: @json($chartDataParticipant->pluck('value')),
                 backgroundColor: [
-                    '#FF7F50', // Coral
-                    '#20B2AA', // SeaGreen
-                    '#FFD700', // Gold
-                    '#ADD8E6', // LightBlue
-                    '#9370DB', // MediumPurple
+                    '#FF7F50',
+                    '#20B2AA',
+                    '#FFD700',
+                    '#ADD8E6',
+                    '#9370DB',
                 ],
                 borderColor: [
-                    '#FF6343', // Tomato
-                    '#3CB371', // MediumSeaGreen
-                    '#FFA500', // Orange
-                    '#87CEFA', // LightSkyBlue
-                    '#8A2BE2', // BlueViolet
+                    '#FF6343',
+                    '#3CB371',
+                    '#FFA500',
+                    '#87CEFA',
+                    '#8A2BE2',
                 ],
                 color: '#ffff',
                 hoverOffset: 4

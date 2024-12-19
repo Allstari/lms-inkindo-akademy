@@ -21,8 +21,8 @@
                     label: 'Kursus Aktif & Belum Aktif',
                     data: [{{ $totalActive }}, {{ $totalInActive }}],
                     backgroundColor: [
-                        'rgb(77, 182, 172)', // Soft teal for Active
-                        'rgb(255, 159, 64)', // Warm orange for Inactive
+                        'rgb(77, 182, 172)',
+                        'rgb(255, 159, 64)',
                     ],
                     color: '#ffff',
                     hoverOffset: 4
@@ -41,8 +41,8 @@
                         {{ $totalNotCompleted }}
                     ],
                     backgroundColor: [
-                        'rgb(28, 170, 103)', // Soft green for Completed
-                        'rgb(239, 83, 80)', // Muted red for Not Completed
+                        'rgb(28, 170, 103)',
+                        'rgb(239, 83, 80)',
                     ],
                     color: '#ffff',
                     hoverOffset: 4
@@ -71,11 +71,10 @@
                     label: 'Progress (%)',
                     data: {!! json_encode($totalProgress?->pluck('progress')) !!},
                     backgroundColor: [
-                        'rgba(77, 182, 172, 0.5)', // Soft teal for Progress
-                        'rgba(255, 159, 64, 0.5)', // Soft orange for Progress
-                        'rgba(28, 170, 103, 0.5)', // Soft green
-                        'rgba(239, 83, 80, 0.5)', // Muted red
-                        'rgba(66, 133, 244, 0.5)', // Soft blue
+                        'rgba(77, 182, 172, 0.5)',
+                        'rgba(255, 159, 64, 0.5)',
+                        'rgba(28, 170, 103, 0.5)',
+                        'rgba(239, 83, 80, 0.5)',
                     ],
                     borderColor: [
                         'rgba(77, 182, 172, 1)',
